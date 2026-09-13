@@ -17,3 +17,60 @@ function getHumanChoice() {
 
 let humanScore = 0;
 let computerScore = 0;
+
+function playRound(humanChoice, computerChoice) {
+    humanChoice = humanChoice.toLowerCase();
+    let verdict = "";
+    let beater = "";
+    let bested = "";
+
+    if (humanChoice === computerChoice) {
+        verdict = "draw";
+    }
+    else if (humanChoice === "rock") {
+        if (computerChoice === "scissors") {
+            verdict = "win";
+        }
+        else {
+            verdict = "lose";
+        }
+    }
+    else if (humanChoice === "paper") {
+        if (computerChoice === "rock") {
+            verdict = "win"
+        }
+        else {
+            verdict = "lose"
+        }
+    }
+    else {
+        if (computerChoice === "rock") {
+            verdict = "lose"
+        }
+        else {
+            verdict = "win"
+        }
+    }
+
+    if (verdict === "win" || verdict === "draw") {
+        beater = humanChoice;
+        bested = computerChoice;
+    }
+    else {
+        beater = computerChoice;
+        bested = humanChoice;
+    }
+
+    // capitalize first letter:
+    beater = beater.charAt(0).toUpperCase() + beater.slice(1);
+    bested = bested.charAt(0).toUpperCase() + bested.slice(1);
+    const explanation = verdict === "draw" ? `${beater} draws ${bested}` :
+        `${beater} beats ${bested}`;
+
+    console.log(`You ${verdict}! ${explanation}`)
+}
+
+const humanChoice = getHumanChoice();
+const computerChoice = getComputerChoice();
+console.log(`Human chose ${humanChoice}, computer chose ${computerChoice}`);
+playRound(humanChoice, computerChoice);
